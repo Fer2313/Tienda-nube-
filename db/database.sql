@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS habittask;
+
+CREATE TABLE usuario (
+    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(320) NOT NULL,
+    contraseña VARCHAR(255) NOT NULL
+);
+
+
