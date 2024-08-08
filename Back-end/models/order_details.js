@@ -39,7 +39,9 @@ const OrderDetails = sequalize.define(
   }
 );
 
+Order.hasMany(OrderDetails, { foreignKey: "orderId" });
 OrderDetails.belongsTo(Order, { foreignKey: "orderId" });
+Product.hasMany(OrderDetails, { foreignKey: "productId" });
 OrderDetails.belongsTo(Product, { foreignKey: "productId" });
 
 export default OrderDetails;

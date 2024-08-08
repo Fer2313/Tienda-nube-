@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import { ChakraProvider } from "@chakra-ui/react";
+const montserrat = Montserrat({ subsets: ["latin"] });
 import "./globals.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import NavBar from "./components/navBar/NavBar";
+import Footer from "./components/footer/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,8 +17,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="bg-black">
+      <ChakraProvider>
+        <body
+          style={{ backgroundColor: "#0000", color: "#ffffff" }}
+          className={montserrat.className}
+        >
+          <NavBar></NavBar>
+          {children}
+          <Footer></Footer>
+        </body>
+      </ChakraProvider>
     </html>
   );
 }

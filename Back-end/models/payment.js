@@ -30,6 +30,8 @@ const Payment = sequalize.define(
     timestamps: false,
   }
 );
-Payment.belongsTo(Order, { foreignKey: "orderId" });
+
+Payment.belongsTo(Order, { foreignKey: 'orderId' });
+Order.hasMany(Payment, { foreignKey: 'orderId' });
 
 export default Payment;
