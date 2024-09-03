@@ -1,17 +1,17 @@
-import Sequalize from "sequelize"
+import Sequalize from 'sequelize'
 
-import dotenv from "dotenv";
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
-const host = process.env.HOST;
-const user = process.env.USER;
-const password = process.env.PASSWORD;
-const database = process.env.DATABASE;
+const host = process.env.HOST
+const user = process.env.USER
+const password = process.env.PASSWORD
+const database = process.env.DATABASE
 
 const sequalize = new Sequalize(database, user, password, {
-    host:host,
-    dialect: "mysql"
-});
+  host,
+  dialect: 'mysql'
+})
 
-export default sequalize;
+export default sequalize

@@ -1,13 +1,18 @@
 import { Box, Container } from "@chakra-ui/react";
 import Image from "next/image";
-import Ico from "../../../public/Group 26.png";
+import Ico from "../../../public/Icon.jpg";
 import React from "react";
-import Form from "../components/login-comp/Form";
+import Form from "@/components/login-comp/Form";
+import NavBar from "@/components/navBar/NavBar";
+import Footer from "@/components/footer/Footer";
+
 
 export default function page() {
 
   return (
-    <main className="flex justify-center my-20 ">
+    <main> 
+      <NavBar></NavBar>
+      <div className="flex justify-center my-20 ">
       <Container
         bgColor={"#2C2C2C"}
         maxW={"400px"}
@@ -16,10 +21,12 @@ export default function page() {
         p={{base:5,sm:10,md:10,lg:10}}
       >
         <Box display={"flex"} mb={5} justifyContent={"center"}>
-          <Image src={Ico} alt="icono" width={100}></Image>
+          <Image className="rounded-full" src={Ico} alt="icono" width={100}></Image>
         </Box>
         <Form></Form>
       </Container>
+      </div>
+      <Footer></Footer>
     </main>
   );
 }

@@ -1,46 +1,46 @@
-import { DataTypes } from "sequelize";
-import sequalize from "../database/database.js";
-import Order from "./order.js";
+import { DataTypes } from 'sequelize'
+import sequalize from '../database/database.js'
+import Order from './order.js'
 
 const Shipment = sequalize.define(
-  "shipment",
+  'shipment',
   {
-    shipmentId:{
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
+    shipmentId: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true
     },
-    orderId:{
-     type: DataTypes.INTEGER,
-     references:{
+    orderId: {
+      type: DataTypes.INTEGER,
+      references: {
         model: Order,
-        key: "orderId",
-     }
+        key: 'orderId'
+      }
     },
     shipmentDate: {
       type: DataTypes.DATE,
-      allowNull: false,
+      allowNull: false
     },
     deliveryDate: {
       type: DataTypes.DATE,
-      allowNull: true,
+      allowNull: true
     },
     trackingNumber: {
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true,
+      unique: true
     },
     status: {
       type: DataTypes.STRING,
-      allowNull: false,
-    },
+      allowNull: false
+    }
   },
   {
-    timestamps: false,
+    timestamps: false
   }
-);
+)
 
-Order.hasMany(Shipment, { foreignKey: 'orderId' });
-Shipment.belongsTo(Order, { foreignKey: 'orderId' });
+Order.hasMany(Shipment, { foreignKey: 'orderId' })
+Shipment.belongsTo(Order, { foreignKey: 'orderId' })
 
-export default Shipment;
+export default Shipment

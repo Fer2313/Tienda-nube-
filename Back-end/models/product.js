@@ -1,34 +1,42 @@
-import { DataTypes } from "sequelize";
-import sequalize from "../database/database.js";
+import { DataTypes } from 'sequelize'
+import sequalize from '../database/database.js'
 
 const Product = sequalize.define(
-  "products",
+  'products',
   {
     productId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     productName: {
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: false
     },
     description: {
       type: DataTypes.TEXT,
-      allowNull: false,
+      allowNull: false
     },
     price: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true
     },
     stock: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true
     },
+    color: {
+      type: DataTypes.STRING(50),
+      allowNull: true
+    },
+    category: {
+      type: DataTypes.ENUM('Iluminacion', 'Hogar', 'Camping'),
+      allowNull: false
+    }
   },
   {
-    timestamps: false,
+    timestamps: false
   }
-);
+)
 
-export default Product;
+export default Product

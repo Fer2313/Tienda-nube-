@@ -1,37 +1,37 @@
-import { DataTypes } from "sequelize";
-import sequalize from "../database/database.js";
-import Order from "./order.js";
+import { DataTypes } from 'sequelize'
+import sequalize from '../database/database.js'
+import Order from './order.js'
 
 const Payment = sequalize.define(
-  "payments",
+  'payments',
   {
     paymentId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     orderId: {
       type: DataTypes.INTEGER,
       references: {
         model: Order,
-        key: "orderId",
-      },
+        key: 'orderId'
+      }
     },
     paymentMethod: {
       type: DataTypes.STRING(60),
-      allowNull: false,
+      allowNull: false
     },
     paymentStatus: {
       type: DataTypes.STRING(60),
-      allowNull: false,
-    },
+      allowNull: false
+    }
   },
   {
-    timestamps: false,
+    timestamps: false
   }
-);
+)
 
-Payment.belongsTo(Order, { foreignKey: 'orderId' });
-Order.hasMany(Payment, { foreignKey: 'orderId' });
+Payment.belongsTo(Order, { foreignKey: 'orderId' })
+Order.hasMany(Payment, { foreignKey: 'orderId' })
 
-export default Payment;
+export default Payment

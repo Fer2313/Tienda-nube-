@@ -3,8 +3,8 @@ import { Montserrat } from "next/font/google";
 import { ChakraProvider } from "@chakra-ui/react";
 const montserrat = Montserrat({ subsets: ["latin"] });
 import "./globals.css";
-import NavBar from "./components/navBar/NavBar";
-import Footer from "./components/footer/Footer";
+import NavBar from "@/components/navBar/NavBar";
+import Footer from "@/components/footer/Footer";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,8 +13,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
+  hideNavbarFooter
 }: Readonly<{
   children: React.ReactNode;
+  hideNavbarFooter:boolean
 }>) {
   return (
     <html lang="en" className="bg-black">
@@ -23,9 +25,7 @@ export default function RootLayout({
           style={{ backgroundColor: "#0000", color: "#ffffff" }}
           className={montserrat.className}
         >
-          <NavBar></NavBar>
           {children}
-          <Footer></Footer>
         </body>
       </ChakraProvider>
     </html>

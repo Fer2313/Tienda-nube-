@@ -1,30 +1,55 @@
-import { DataTypes } from "sequelize";
-import sequalize from "../database/database.js";
+import { DataTypes } from 'sequelize'
+import sequalize from '../database/database.js'
 
 const User = sequalize.define(
-  "users",
+  'users',
   {
     userId: {
       type: DataTypes.INTEGER,
       autoIncrement: true,
-      primaryKey: true,
+      primaryKey: true
     },
     name: {
       type: DataTypes.STRING(100),
-      allowNull: false,
+      allowNull: false
+    },
+    lastName: {
+      type: DataTypes.STRING(100),
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING(200),
-      allowNull: false,
+      allowNull: false
     },
     password: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: false
     },
+    cellphone: {
+      type: DataTypes.STRING(100),
+      allowNull: false
+    },
+    address: {
+      type: DataTypes.STRING(255),
+      allowNull: true
+    },
+    failedLoginAttempts: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    lockUntil: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
+    role: {
+      type: DataTypes.ENUM('admin', 'user'),
+      defaultValue: 'user',
+      allowNull: false
+    }
   },
   {
-    timestamps: false,
+    timestamps: false
   }
-);
+)
 
-export default User;
+export default User
