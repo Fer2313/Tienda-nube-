@@ -17,7 +17,7 @@ import { validateUser } from './middlewares/authorization.js'
 dotenv.config()
 
 export const server = express()
-const serverPort = process.env.PORT
+const serverPort = process.env.PORT || 3000
 
 server.get('/', (req, res) => {
   res.status(200).send('<h1>Hola mundo</h1>')
@@ -39,7 +39,7 @@ main()
 
 server.use(
   cors({
-    origin: 'http://localhost:3000', // Origen permitido
+    origin: ['http://localhost:3001', ''], // Origen permitido
     credentials: true // Permite el uso de cookies y credenciales
   })
 )

@@ -36,7 +36,7 @@
 }
 
 .dot.active {
-  background: #1EADFF;
+  background: #1eadff;
 }
 
 .arrow {
@@ -59,11 +59,11 @@
   right: 2px;
 }
 
-@media (min-width:768px) {
-  [class*=" number-slide"] {
+@media (min-width: 768px) {
+  [class*=' number-slide'] {
     height: 400px;
-   }
-   .arrow--left {
+  }
+  .arrow--left {
     left: 40px;
   }
   .arrow--right {
@@ -72,8 +72,8 @@
   }
 }
 @media (min-width: 769px) {
-  [class*=" number-slide"] {
-   height: 500px;
+  [class*=' number-slide'] {
+    height: 500px;
   }
   .arrow--left {
     left: 150px;

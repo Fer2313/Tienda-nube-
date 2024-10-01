@@ -1,36 +1,36 @@
-"use client";
+'use client'
 import {
   Accordion,
   AccordionItem,
   AccordionButton,
   AccordionPanel,
   Text,
-} from "@chakra-ui/react";
-import perfil from "../../../public/Generic avatar.png";
-import carrito from "../../../public/Icon Button.png";
-import { IoCloseOutline, IoReorderThreeOutline } from "react-icons/io5";
-import React, { useEffect, useState } from "react";
-import { Button } from "../Button";
-import Link from "next/link";
-import Image from "next/image";
+} from '@chakra-ui/react'
+import perfil from '../../../public/Generic avatar.png'
+import carrito from '../../../public/Icon Button.png'
+import { IoCloseOutline, IoReorderThreeOutline } from 'react-icons/io5'
+import React, { useEffect, useState } from 'react'
+import { Button } from '../Button'
+import Link from 'next/link'
+import Image from 'next/image'
 
-export function MyAccordionContent({ token }: any) {
-  const [isClient, setIsClient] = useState(false);
+export function MyAccordionContent({ token }: { token: string | unknown }) {
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    setIsClient(true)
+  }, [])
 
   if (!isClient) {
-    return null;
+    return null
   }
   return (
-    <Accordion borderColor={"#282828"} bgColor={"#282828"} allowToggle>
+    <Accordion borderColor={'#282828'} bgColor={'#282828'} allowToggle>
       <AccordionItem>
         {({ isExpanded }) => (
           <>
             <h2>
-              <AccordionButton display={"flex"} justifyContent={"center"}>
+              <AccordionButton display={'flex'} justifyContent={'center'}>
                 {isExpanded ? (
                   <IoCloseOutline color="white" size={30} />
                 ) : (
@@ -81,5 +81,5 @@ export function MyAccordionContent({ token }: any) {
         )}
       </AccordionItem>
     </Accordion>
-  );
+  )
 }

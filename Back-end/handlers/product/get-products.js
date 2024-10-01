@@ -2,6 +2,12 @@ import { Op, Sequelize } from 'sequelize'
 import Product from '../../models/product.js'
 import ProductImage from '../../models/product_image.js'
 
+function getProductsByName (name) {
+  return Sequelize.where(Sequelize.fn('LOWER', Sequelize.col('productName')), {
+    [Op.like]: `%${name.toLowerCase()}%`
+  })
+}
+
 export async function getAllProducts (req, res) {
   try {
     const products = await Product.findAll({
@@ -51,7 +57,7 @@ export async function getProducts (req, res) {
           }
         ],
         order: [
-        // Ordenar para dar prioridad a los productos que más se parezcan al nombre del producto principal
+          // Ordenar para dar prioridad a los productos que más se parezcan al nombre del producto principal
           [
             Sequelize.literal(`CASE 
             WHEN productName LIKE '${productName}%' THEN 1
@@ -96,23 +102,78 @@ export const getProductsByQuery = async (req, res) => {
     if (color) {
       products = await Product.findAll({
         attributes: ['productId', 'color'],
-        where: Sequelize.where(
-          Sequelize.fn('LOWER', Sequelize.col('productName')),
-          { [Op.like]: `%${productName.toLowerCase()}%` }
-        )
+        where: getProductsByName(productName)
       })
     } else {
       products = await Product.findAll({
-        where: Sequelize.where(
-          Sequelize.fn('LOWER', Sequelize.col('productName')),
-          { [Op.like]: `%${productName.toLowerCase()}%` }
-        )
+        where: getProductsByName(productName)
       })
     }
     if (!products.length) {
       return res.status(400).send('No se encontraron productos')
     }
     return res.status(200).json(products)
+  } catch (error) {}
+}
+
+export const getProductsFilters = async (req, res) => {
+  const { category, priceMin, priceMax, price, name, page, pageSize } =
+    req.query
+  const where = {}
+  let order = [['productName', 'ASC']]
+  try {
+    if (!category && !priceMin && !priceMax && !name && !page && !pageSize && !price) {
+      return res.status(400).send('No se pasaron datos')
+    }
+    if (!page || !pageSize) {
+      return res
+        .status(400)
+        .send('No se paso el numero de pagina y el tamaño de registros a mostrar')
+    }
+    if (category) {
+      where.category = category
+    }
+    if (name) {
+      where.productName = getProductsByName(name)
+    }
+    if (price) {
+      if (price === 'menor-mayor') {
+        order = [['price', 'ASC']]
+      }
+      if (price === 'mayor-menor') {
+        order = [['price', 'DESC']]
+      }
+    }
+    if (priceMin && priceMax) {
+      where.price = {
+        [Op.between]: [priceMin, priceMax]
+      }
+    }
+
+    const pageNumber = parseInt(page) || 1
+    const pageSizeNumber = parseInt(pageSize) || 10
+    const offset = (pageNumber - 1) * pageSizeNumber
+    const limit = pageSizeNumber
+
+    const productsCount = await Product.count({
+      where
+    })
+
+    const productsData = await Product.findAll({
+      where,
+      order,
+      offset,
+      limit,
+      include: [
+        {
+          model: ProductImage,
+          as: 'images',
+          separate: true,
+          limit: 1
+        }
+      ]
+    })
+    return res.status(200).json({ productsCount, productsData })
   } catch (error) {
     return res.status(500).json(error)
   }

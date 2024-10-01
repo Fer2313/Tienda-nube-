@@ -1,18 +1,19 @@
-import axios from "axios";
+import axios from 'axios'
 
-export const getProducts = async (id:any) => {
+export const getProducts = async (id: number | boolean) => {
   try {
-    let products;
+    let products
     if (!id) {
       products = await axios.get(
-        "http://localhost:2000/api/product/getProducts"
-      );
+        `${process.env.NEXT_PUBLIC_API_URL}/api/product/getProducts`,
+      )
     } else {
-      products = await axios.get(`http://localhost:2000/api/product/getProducts?id=${id}`
-      );
+      products = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/api/product/getProducts?id=${id}`,
+      )
     }
-    return products.data;
+    return products.data
   } catch (error) {
-    return console.log(error);
+    return console.log(error)
   }
-};
+}

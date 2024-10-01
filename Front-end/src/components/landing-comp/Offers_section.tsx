@@ -1,9 +1,13 @@
-import { titleSize } from "@/chakraStyles/styles";
-import { Divider, Text } from "@chakra-ui/react";
-import React from "react";
-import Products_Carrusel from "./Products_carrusel";
+import { titleSize } from '@/chakraStyles/styles'
+import { Divider, Text } from '@chakra-ui/react'
+import React from 'react'
+import Products_Carrusel from './Products_carrusel'
+import { Products } from '@/interfaces/interfaces'
+interface Props {
+  products: Products[] // Define products como propiedad
+}
 
-export default function Offers_section({ products }:any) {
+export default function Offers_section({ products }: Props) {
   return (
     <main className="mt-20">
       <Divider />
@@ -12,5 +16,5 @@ export default function Offers_section({ products }:any) {
       </Text>
       <Products_Carrusel products={products}></Products_Carrusel>
     </main>
-  );
+  )
 }

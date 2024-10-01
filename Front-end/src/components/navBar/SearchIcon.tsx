@@ -1,5 +1,7 @@
-import React from "react";
-export const SearchIcon = (props:any) => (
+import React from 'react'
+export const SearchIcon = (
+  props: React.JSX.IntrinsicAttributes & React.SVGProps<SVGSVGElement>,
+) => (
   <svg
     aria-hidden="true"
     fill="none"
@@ -25,4 +27,4 @@ export const SearchIcon = (props:any) => (
       strokeWidth="2"
     />
   </svg>
-);
+)

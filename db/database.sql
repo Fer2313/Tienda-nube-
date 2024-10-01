@@ -1,5 +1,4 @@
 /* 
-
 //Productos
 
 INSERT INTO products (productName, description, price, stock, color, category) VALUES ("Reflector LED RGB 50w", "Flujo luminoso: 3000 lm
@@ -10,7 +9,7 @@ Medidas: 178 mm × 158 mm × 28 mm
 CCT: RGB<
 Incluye control remoto (pila incluida)",
 null,
-null,
+6,
 "Negro",
 "Iluminacion");
 
@@ -359,3 +358,6 @@ UPDATE products SET color = null where productId = 1;
 UPDATE products SET color = null where productId = 3;
 
 */
+
+UPDATE products SET stock = 6 WHERE productId=16;
+UPDATE products SET price = 6 WHERE productId=16;

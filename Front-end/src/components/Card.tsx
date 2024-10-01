@@ -1,4 +1,4 @@
-"use client";
+'use client'
 import {
   Button,
   Card,
@@ -11,20 +11,23 @@ import {
   Stack,
   Text,
   Box,
-} from "@chakra-ui/react";
-import React, { useEffect } from "react";
-import { subtitleSize } from "../chakraStyles/styles";
-import Link from "next/link";
-import { FaShoppingCart } from "react-icons/fa";
+  Tag,
+} from '@chakra-ui/react'
+import React from 'react'
+import { subtitleSize } from '../chakraStyles/styles'
+import Link from 'next/link'
+import { FaShoppingCart } from 'react-icons/fa'
+import { Products } from '@/interfaces/interfaces'
 
-export default function ProductCard({ product }: any) {
-  useEffect(() => {
-    console.log(product);
-  }, []);
+interface Props {
+  product: Products
+}
+
+export default function ProductCard({ product }: Props) {
   return (
-    <Card size="sm" maxW="sm">
+    <Card size="sm" w={'100%'} maxW="sm">
       <CardBody>
-        <Box display={"flex"} justifyContent={"center"}>
+        <Box display={'flex'} justifyContent={'center'}>
           <Image
             src={product.images[0].imageUrl}
             alt="Green double couch with wooden legs"
@@ -36,9 +39,17 @@ export default function ProductCard({ product }: any) {
           <Heading fontSize={subtitleSize} h={12}>
             {product.productName}
           </Heading>
-          <Text color="blue.600" fontSize="2xl">
-            $450
-          </Text>
+          <Box display={'flex'} justifyContent={'space-between'}>
+            <Text color="blue.600" fontSize="2xl">
+              {product?.price ? '$' + product?.price : '$0'}
+            </Text>
+            <Tag
+              colorScheme={'yellow'}
+              size={{ base: 'sm', md: 'md', lg: 'lg' }}
+            >
+              {product.category}
+            </Tag>
+          </Box>
         </Stack>
       </CardBody>
       <Divider />
@@ -55,5 +66,5 @@ export default function ProductCard({ product }: any) {
         </ButtonGroup>
       </CardFooter>
     </Card>
-  );
+  )
 }

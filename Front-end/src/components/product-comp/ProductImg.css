@@ -1,14 +1,11 @@
-
 .number-slide1 {
-  background-color:white;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
 }
-
-
 
 .navigation-wrapper {
   position: relative;

@@ -1,10 +1,12 @@
-import axios from "axios";
+import axios from 'axios'
 
 export default async function getProductById(id: number) {
   try {
-    const product = await axios.get(`http://localhost:2000/api/product/getProduct/${id}`)
+    const product = await axios.get(
+      `${process.env.NEXT_PUBLIC_API_URL}/api/product/getProduct/${id}`,
+    )
     return product.data
   } catch (error) {
-    return console.log(error);
+    return console.log(error)
   }
 }

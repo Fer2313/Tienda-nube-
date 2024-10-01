@@ -1,0 +1,21 @@
+app = 'mysql-crimson-river-3406'
+primary_region = 'eze'
+
+[build]
+  image = 'mysql:8'
+
+[[vm]]
+  memory = '2gb'
+  cpu_kind = 'shared'
+  cpus = 1
+
+[processes]
+  app = "--datadir /data/mysql"
+
+[mounts]
+  source = "mysqldata"
+  destination = "/var/lib/mysql"
+
+[env]
+  MYSQL_DATABASE = "tiendanube_db"
+  MYSQL_USER = "root_fer_userwqe1232"

@@ -1,18 +1,20 @@
-import { Divider, Text } from "@chakra-ui/react";
-import React, { useEffect, useState } from "react";
-import Products_Carrusel from "../landing-comp/Products_carrusel";
-import { titleSize } from "@/chakraStyles/styles";
-import { getProducts } from "@/services/getProducts";
+import { Text } from '@chakra-ui/react'
+import React, { useEffect, useState } from 'react'
+import Products_Carrusel from '../landing-comp/Products_carrusel'
+import { titleSize } from '@/chakraStyles/styles'
+import { getProducts } from '@/services/getProducts'
+import { Products } from '@/interfaces/interfaces'
 
-export default function Recomend_carrusel({ id }: any) {
-  let [products, setProducts] = useState<any>([]);
+export default function Recomend_carrusel({ id }: { id: number }) {
+  const [products, setProducts] = useState<Products[]>([])
   async function getProductsHandler() {
-    const productos = await getProducts(id);
-    setProducts(productos);
+    const productos = await getProducts(id)
+    setProducts(productos)
   }
+
   useEffect(() => {
-    getProductsHandler();
-  }, []);
+    getProductsHandler()
+  }, [])
 
   return (
     <main className="mt-10">
@@ -21,5 +23,5 @@ export default function Recomend_carrusel({ id }: any) {
       </Text>
       <Products_Carrusel products={products}></Products_Carrusel>
     </main>
-  );
+  )
 }
