@@ -22,7 +22,7 @@ export default function Landing() {
   return (
     <main className="flex flex-col">
       <NavBar></NavBar>
-      {products ? (
+      {products && products.length ? (
         <section>
           <Header></Header>
           <article className="flex flex-col gap-20 mx-5 md:mx-10 lg:mx-10">

@@ -5,10 +5,10 @@ dotenv.config()
 
 export function validateUser () {
   return (req, res, next) => {
-    const { jwt } = req.cookies
+    const jwt = req.headers.authorization ? req.headers.authorization?.split(' ')[1] : req.cookies.jwt
 
     if (!jwt) {
-      return res.status(400).json({ error: 'Debes incluir el header con el token' })
+      return res.status(400).json({ error: 'Debes incluir el token en la cookie' })
     }
 
     try {

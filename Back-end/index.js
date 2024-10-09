@@ -37,36 +37,45 @@ async function main () {
 
 main()
 
-server.use(
-  cors({
-    origin: ['http://localhost:3001', ''], // Origen permitido
-    credentials: true // Permite el uso de cookies y credenciales
-  })
-)
-
 server.use(cookieParser())
 server.use(express.json())
 server.use(express.urlencoded({ extended: true }))
+const allowedOrigins = ['http://localhost:3001', 'https://tienda-nube.vercel.app']
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}
+server.use(
+  cors(corsOptions)
+)
 
 server.use('/api/auth', authRoutes)
 server.use('/api/product', productRoutes)
 
 server.use(validateUser())
 
-server.get('/api/verify-session', (req, res) => {
+server.get('/api/auth/verify-session', (req, res) => {
   res.status(200).json({ message: 'Autorizado' })
+})
+server.get('/api/auth/logout', (res, req) => {
+  res.clearCookie('jwt')
+  return res.status(200).json({ message: 'Logout exitoso' })
 })
 
 server.use(router)
 
-/*
-server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000')
-  res.header('Access-Control-Allow-Credentials', 'true')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  )
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE')
-  next()
-}) */
+/* const allowedOrigins = ['http://localhost:3001', 'https://tienda-nube.vercel.app']
+
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}
+
+server.use(
+  cors(corsOptions)
+)
+ */

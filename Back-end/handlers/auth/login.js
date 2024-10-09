@@ -44,9 +44,10 @@ export const loginHandler = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       maxAge: 3000000,
-      sameSite: 'Lax',
+      sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
       path: '/'
     }
+    console.log(req.coookie)
     return res.cookie('jwt', token, cookieConfig).status(200).json({ message: 'Login exitoso', tokenpayload })
   } catch (error) {
     return res.status(500).send('Ha ocurrido un error con el servidor')

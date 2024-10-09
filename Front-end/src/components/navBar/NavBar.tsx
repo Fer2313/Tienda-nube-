@@ -14,19 +14,19 @@ import {
 } from '@chakra-ui/react'
 import { MyAccordionContent } from './myAccordionContent'
 import Link from 'next/link'
-import { verifySession } from '@/services/verifySession'
 import { FaShoppingCart } from 'react-icons/fa'
+import useAuthStore from '@/store/auth'
 
 export default function NavBar() {
   const [isMobile, setIsMobile] = useState(false)
-  const [token, setIsAuthenticated] = useState<unknown>('None')
-  const fetchVerifySession = async () => {
-    const verify = await verifySession()
-    setIsAuthenticated(verify)
-  }
-  useEffect(() => {
-    fetchVerifySession()
+  const { isAuthenticated, checkAuth } = useAuthStore()
 
+  useEffect(() => {
+    const verify = async () => {
+      await checkAuth()
+    }
+
+    verify()
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768) // Puedes ajustar el umbral de tamaño
     }
@@ -39,7 +39,7 @@ export default function NavBar() {
 
     // Limpiar el listener al desmontar el componente
     return () => window.removeEventListener('resize', handleResize)
-  }, [])
+  }, [checkAuth])
 
   return (
     <article>
@@ -77,11 +77,11 @@ export default function NavBar() {
           </InputRightElement>
         </InputGroup>
         {/* buttons */}
-        {token !== 'None' ? (
+        {isAuthenticated ? (
           <Box w={{ base: '', md: '100px', lg: '192.44px' }}>
             {!isMobile ? (
               <div className="flex gap-5 items-center justify-end">
-                {token ? (
+                {isAuthenticated ? (
                   <Link href="/cart">
                     <Box className="flex items-center gap-1 bg-yellow-500 p-2 rounded-full">
                       <FaShoppingCart></FaShoppingCart>
@@ -99,7 +99,7 @@ export default function NavBar() {
                     ></Button>
                   </Link>
                 )}
-                {token ? (
+                {isAuthenticated ? (
                   <Link href="/profile">
                     <Avatar src="https://bit.ly/broken-link" />
                   </Link>
@@ -129,7 +129,7 @@ export default function NavBar() {
           </Box>
         )}
       </nav>
-      {isMobile ? <MyAccordionContent token={token} /> : null}
+      {isMobile ? <MyAccordionContent token={isAuthenticated} /> : null}
     </article>
   )
 }
