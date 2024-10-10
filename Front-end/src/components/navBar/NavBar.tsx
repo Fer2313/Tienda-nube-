@@ -77,7 +77,7 @@ export default function NavBar() {
           </InputRightElement>
         </InputGroup>
         {/* buttons */}
-        {isAuthenticated ? (
+        {isAuthenticated !== undefined ? (
           <Box w={{ base: '', md: '100px', lg: '192.44px' }}>
             {!isMobile ? (
               <div className="flex gap-5 items-center justify-end">

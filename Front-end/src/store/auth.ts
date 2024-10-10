@@ -2,13 +2,13 @@ import { create } from 'zustand'
 import axios from 'axios'
 
 type StoreAuth = {
-  isAuthenticated: boolean
+  isAuthenticated: boolean | undefined
   checkAuth: () => Promise<void>
   logout: () => Promise<void>
 }
 
 const useAuthStore = create<StoreAuth>((set) => ({
-  isAuthenticated: false,
+  isAuthenticated: undefined,
   checkAuth: async () => {
     try {
       const response = await axios.get(

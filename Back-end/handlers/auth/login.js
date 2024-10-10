@@ -42,6 +42,7 @@ export const loginHandler = async (req, res) => {
     const token = jwt.sign(tokenpayload, process.env.JWT_SECRET_SESSION_KEY, { expiresIn: process.env.JWT_EXPIRES })
     const cookieConfig = {
       httpOnly: true,
+      domain:  process.env.NODE_ENV === 'production' ? 'app-tienda-nube.fly.dev' : 'localhost',
       secure: process.env.NODE_ENV === 'production',
       maxAge: 3000000,
       sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',

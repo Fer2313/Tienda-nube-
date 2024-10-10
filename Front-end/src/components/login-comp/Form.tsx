@@ -37,7 +37,6 @@ function Form() {
       confirmButtonText: 'Ok',
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.reload()
         router.push('/')
       }
     })
