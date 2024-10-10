@@ -12,16 +12,12 @@ import useAuthStore from '@/store/auth'
 export default function Page() {
   const router = useRouter()
 
-  const { isAuthenticated, checkAuth } = useAuthStore()
+  const { isAuthenticated } = useAuthStore()
   useEffect(() => {
-    const verify = async () => {
-      await checkAuth()
-      if (isAuthenticated) {
-        router.push('/')
-      }
+    if (isAuthenticated) {
+      router.push('/')
     }
-    verify()
-  }, [isAuthenticated, router, checkAuth])
+  }, [isAuthenticated, router])
 
   return (
     <main>
