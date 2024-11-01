@@ -120,7 +120,11 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
               {userData.image ? (
                 <Avatar size="xl" name="Cliente" src={userData?.image} />
               ) : (
-                <Avatar src="https://bit.ly/broken-link" />
+                <Avatar
+                  size="xl"
+                  name="Cliente"
+                  src="https://bit.ly/broken-link"
+                />
               )}
 
               <Box
