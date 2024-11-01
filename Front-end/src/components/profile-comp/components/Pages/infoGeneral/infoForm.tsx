@@ -85,22 +85,29 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
 
   useEffect(() => {
     const getUser = async () => {
-      const user = await getUserById(id)
-      const separator = user.address.split('-')
-      setUserData({
+      const userReq = await getUserById(id)
+      const separator = userReq.address.split('-')
+      console.log(userReq, 'antes de asignar')
+      setUserData((user) => ({
         ...user,
-        maskEmail: maskEmail(user.email),
+        name: userReq.name,
+        lastName: userReq.lastName,
+        email: userReq.email,
+        cellphone: userReq.cellphone,
+        address: userReq.address,
+        image: userReq.image,
+        maskEmail: maskEmail(userReq.email),
         country: separator[0],
         state: separator[1],
         locality: separator[2],
         street: separator[3],
         number: separator[4],
-      })
+      }))
     }
     if (!userData.name) {
       getUser()
     }
-    console.log(userData)
+    console.log(userData, 'Despues de asignar')
   }, [id, userData])
 
   return (
