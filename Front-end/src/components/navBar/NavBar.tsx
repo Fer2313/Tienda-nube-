@@ -5,28 +5,32 @@ import Ico from '../../../public/Icon.jpg'
 import { SearchIcon } from './SearchIcon'
 import { Button } from '../Button'
 import {
-  Avatar,
   Box,
   Input,
   InputGroup,
   InputRightElement,
   Spinner,
+  Tooltip,
 } from '@chakra-ui/react'
 import { MyAccordionContent } from './myAccordionContent'
 import Link from 'next/link'
 import { FaShoppingCart } from 'react-icons/fa'
 import useAuthStore from '@/store/auth'
+import PerfilAccordion from './PerfilAccordion'
 
 export default function NavBar() {
   const [isMobile, setIsMobile] = useState(false)
-  const { isAuthenticated, checkAuth } = useAuthStore()
+  const { isAuthenticated, checkAuth, session, sessionData } = useAuthStore()
 
   useEffect(() => {
     const verify = async () => {
       await checkAuth()
     }
-
+    const getSession = async () => {
+      await session()
+    }
     verify()
+    getSession()
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768) // Puedes ajustar el umbral de tamaño
     }
@@ -45,7 +49,12 @@ export default function NavBar() {
     <article>
       <nav className="flex bg-[#282828] px-5 py-3 gap-2 items-center justify-between">
         {/* icon */}
-        <Box w={{ base: '', md: '100px', lg: '192.44px' }}>
+        <Box
+          w={{ base: '100%', md: '500px', lg: '650px' }}
+          display={'flex'}
+          gap={{ base: 5, sm: 10, md: 10, lg: 10 }}
+          alignItems={'center'}
+        >
           <Link href={'/'}>
             <Image
               className="rounded-full"
@@ -54,28 +63,24 @@ export default function NavBar() {
               width={60}
             ></Image>
           </Link>
+          {/* search */}
+          <InputGroup w="100%" color={'black'} size={{ base: 'sm', lg: 'md' }}>
+            <Input
+              bgColor={'white'}
+              placeholder={
+                isMobile ? '¿Que buscas?' : 'Escribe aqui que buscas...'
+              }
+            />
+            <InputRightElement>
+              <Link
+                href="/explore"
+                className="flex justify-center items-center hover:bg-[#1EADFF] w-full h-full rounded-r-sm md:lg:rounded-r-md lg:rounded-r-md"
+              >
+                <SearchIcon className="text-black/90 mb-0.5 dark:text-white/90 text-slate-500 pointer-events-none flex-shrink-0" />
+              </Link>
+            </InputRightElement>
+          </InputGroup>
         </Box>
-        {/* search */}
-        <InputGroup
-          color={'black'}
-          size={{ base: 'sm', lg: 'md' }}
-          maxW={{ base: '100%', md: '500px' }}
-        >
-          <Input
-            bgColor={'white'}
-            placeholder={
-              isMobile ? '¿Que buscas?' : 'Escribe aqui que buscas...'
-            }
-          />
-          <InputRightElement>
-            <Link
-              href="/explore"
-              className="flex justify-center items-center hover:bg-[#1EADFF] w-full h-full rounded-r-md"
-            >
-              <SearchIcon className="text-black/90 mb-0.5 dark:text-white/90 text-slate-400 pointer-events-none flex-shrink-0" />
-            </Link>
-          </InputRightElement>
-        </InputGroup>
         {/* buttons */}
         {isAuthenticated !== undefined ? (
           <Box w={{ base: '', md: '100px', lg: '192.44px' }}>
@@ -83,9 +88,11 @@ export default function NavBar() {
               <div className="flex gap-5 items-center justify-end">
                 {isAuthenticated ? (
                   <Link href="/cart">
-                    <Box className="flex items-center gap-1 bg-yellow-500 p-2 rounded-full">
-                      <FaShoppingCart></FaShoppingCart>
-                    </Box>
+                    <Tooltip label="Carrito">
+                      <Box className="flex items-center gap-1 bg-yellow-500 p-2 rounded-full">
+                        <FaShoppingCart></FaShoppingCart>
+                      </Box>
+                    </Tooltip>
                   </Link>
                 ) : (
                   <Link href="/login">
@@ -100,9 +107,12 @@ export default function NavBar() {
                   </Link>
                 )}
                 {isAuthenticated ? (
-                  <Link href="/profile">
-                    <Avatar src="https://bit.ly/broken-link" />
-                  </Link>
+                  <Box>
+                    <PerfilAccordion
+                      sessionData={sessionData}
+                      isMobile={isMobile}
+                    ></PerfilAccordion>
+                  </Box>
                 ) : (
                   <Link href="/register">
                     <Button
@@ -129,7 +139,9 @@ export default function NavBar() {
           </Box>
         )}
       </nav>
-      {isMobile ? <MyAccordionContent token={isAuthenticated} /> : null}
+      {isMobile ? (
+        <MyAccordionContent sessionData={sessionData} token={isAuthenticated} />
+      ) : null}
     </article>
   )
 }

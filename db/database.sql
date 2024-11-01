@@ -347,17 +347,10 @@ INSERT INTO product_images (imageUrl, productId) VALUES ("https://res.cloudinary
 INSERT INTO product_images (imageUrl, productId) VALUES ("https://res.cloudinary.com/dd1gykekz/image/upload/v1724263089/tiendanube/mvvxz3jboxaeeqdiiquq.jpg", 23);
 INSERT INTO product_images (imageUrl, productId) VALUES ("https://res.cloudinary.com/dd1gykekz/image/upload/v1724263085/tiendanube/iyfsflstkpvvh4flyhkr.jpg", 23);
 
-
-
-
-
-
-
 UPDATE products SET color = null where productId = 2;
 UPDATE products SET color = null where productId = 1;
 UPDATE products SET color = null where productId = 3;
-
+UPDATE products SET stock = 6 WHERE productId = 16;
+UPDATE products SET price = 6 WHERE productId = 16;
 */
 
-UPDATE products SET stock = 6 WHERE productId=16;
-UPDATE products SET price = 6 WHERE productId=16;

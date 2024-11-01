@@ -29,6 +29,11 @@ const User = sequalize.define(
       type: DataTypes.STRING(100),
       allowNull: false
     },
+    image: {
+      type: DataTypes.STRING(255),
+      defaultValue: 'https://bit.ly/broken-link',
+      allowNull: true
+    },
     address: {
       type: DataTypes.STRING(255),
       allowNull: true

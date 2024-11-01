@@ -17,6 +17,14 @@ export interface myFormRegValues {
   repeatPassword: string
 }
 
+export interface sessionData {
+  userId: number
+  name: string
+  image: string | undefined
+  lastName: string
+  role: string
+}
+
 export interface myFormLogValues {
   email: string
   password: string
@@ -62,4 +70,13 @@ export interface Filters {
   name: string | undefined
   page: number
   pageSize: number
+}
+
+export interface UserData {
+  name: string
+  lastName: string
+  email: string
+  cellphone: number | string
+  address: string
+  image: string
 }

@@ -13,7 +13,7 @@ export const registerHandler = async (req, res) => {
     return res.status(400).send('Ese usuario ya existe')
   }
   const hashedPassword = await bcrypt.hash(password, 10)
-  const newUser = { name, lastName, cellphone, email, password: hashedPassword }
+  const newUser = { name, lastName, cellphone, email, password: hashedPassword, image: '' }
   try {
     User.create(newUser)
     return res.status(200).json({ message: 'Su cuenta ha sido creado exitosamente' })
