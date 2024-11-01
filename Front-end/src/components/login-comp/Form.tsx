@@ -111,7 +111,7 @@ function Form() {
             </Field>
             <Box
               display={'flex'}
-              fontSize={text}
+              fontSize={'15px'}
               gap={2}
               flexDir={'column'}
               alignItems={'center'}
