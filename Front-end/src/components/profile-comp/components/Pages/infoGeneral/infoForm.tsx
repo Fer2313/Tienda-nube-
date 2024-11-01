@@ -95,10 +95,10 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
         street: separator[3],
         number: separator[4],
       })
-      console.log(userData)
     }
-
-    getUser()
+    if (!userData.name) {
+      getUser()
+    }
   }, [id, userData])
 
   return (
