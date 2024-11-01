@@ -103,7 +103,7 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
 
   return (
     <main className="flex justify-center">
-      {userData.name ? (
+      {userData ? (
         <Box
           bgColor={'white'}
           py={{ base: 3, sm: 10, md: 10, lg: 10 }}
