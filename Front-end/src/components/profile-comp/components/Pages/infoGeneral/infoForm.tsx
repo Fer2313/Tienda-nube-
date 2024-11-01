@@ -85,7 +85,6 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
   useEffect(() => {
     const getUser = async () => {
       const user = await getUserById(id)
-      console.log(user)
       const separator = user.address.split('-')
       setUserData({
         ...user,
@@ -96,10 +95,11 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
         street: separator[3],
         number: separator[4],
       })
+      console.log(userData)
     }
 
     getUser()
-  }, [id])
+  }, [id, userData])
 
   return (
     <main className="flex justify-center">
