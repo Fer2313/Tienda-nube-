@@ -99,6 +99,7 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
     if (!userData.name) {
       getUser()
     }
+    console.log(userData)
   }, [id, userData])
 
   return (
