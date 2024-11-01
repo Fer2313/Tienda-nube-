@@ -42,7 +42,7 @@ export default function Profile() {
                 sessionData={sessionData}
               />
             </section>
-            <span className="w-full py-10 flex justify-start items-start">
+            <span className="w-full pt-10 flex justify-start items-start">
               {pages.General ? <InfoGeneral id={sessionData?.userId} /> : null}
               {pages.Security ? <Security /> : null}
               {pages.Orders ? <Orders /> : null}

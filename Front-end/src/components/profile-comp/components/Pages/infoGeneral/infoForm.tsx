@@ -110,7 +110,7 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
           textColor={'black'}
           borderRadius={{ base: 'none', sm: 'md', md: 'md', lg: 'md' }}
           maxWidth="500px"
-          mt={10}
+          mt={8}
           mx="0"
           px={{ base: 3, sm: 10, md: 10, lg: 10 }}
           boxShadow="lg"
@@ -120,11 +120,7 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
               {userData.image ? (
                 <Avatar size="xl" name="Cliente" src={userData?.image} />
               ) : (
-                <Avatar
-                  size="xl"
-                  name="Cliente"
-                  src="https://bit.ly/broken-link"
-                />
+                <Avatar size="xl" src="https://bit.ly/broken-link" />
               )}
 
               <Box
@@ -267,33 +263,25 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
                   )}
                   <InputRightElement>
                     {!eye ? (
-                      <Button
-                        size={{ base: 'xs', sm: 'md', md: 'md', lg: 'md' }}
+                      <button
+                        type="button"
+                        className="flex justify-center items-center rounded-r-sm hover:bg-slate-200 h-full w-full border"
                         onClick={() => {
                           setEye(true)
                         }}
-                        p={0}
-                        roundedRight={3}
-                        rounded={0}
                       >
                         <FaRegEyeSlash></FaRegEyeSlash>
-                      </Button>
+                      </button>
                     ) : (
-                      <Button
-                        size={{ base: 'xs', sm: 'md', md: 'md', lg: 'md' }}
-                        bgColor="white"
-                        border={1}
-                        borderStyle={'solid'}
-                        borderColor={'gray.100'}
-                        p={0}
-                        roundedRight={3}
-                        rounded={0}
+                      <button
+                        type="button"
+                        className="flex justify-center items-center rounded-r-sm hover:bg-slate-200 h-full w-full border"
                         onClick={() => {
                           setEye(false)
                         }}
                       >
                         <FaEye></FaEye>
-                      </Button>
+                      </button>
                     )}
                   </InputRightElement>
                 </InputGroup>

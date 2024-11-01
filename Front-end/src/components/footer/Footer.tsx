@@ -7,7 +7,7 @@ import Image from 'next/image'
 
 export default function Footer() {
   return (
-    <Box className="flex flex-col mt-20 text-center py-5 bg-[#282828]">
+    <Box className="flex flex-col mt-10 text-center py-5 bg-[#282828]">
       <Text as={'h2'} fontSize={subtitleSize}>
         Seguinos en:
       </Text>
