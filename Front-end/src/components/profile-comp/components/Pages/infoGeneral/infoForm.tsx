@@ -54,17 +54,17 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
       userData.street &&
       userData.number
     ) {
+      const address = `${userData.country}-${userData.state}-${userData.locality}-${userData.street}-${userData.number}`
       setUserData((user) => ({
         ...user,
-        address: `${userData.country}-${userData.state}-${userData.locality}-${userData.street}-${userData.number}`,
+        address,
       }))
-
       const body = {
         name: userData.name,
         lastName: userData.lastName,
         email: userData.email,
         cellphone: userData.cellphone,
-        address: userData.address,
+        address: address,
         image: userData.image,
       }
       await updateUserById(id, body)
@@ -86,6 +86,7 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
   useEffect(() => {
     const getUser = async () => {
       const user = await getUserById(id)
+      console.log(user)
       if (user.address) {
         setUserData({
           ...user,
@@ -96,12 +97,16 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
           street: user.address.split('-')[3],
           number: user.address.split('-')[4],
         })
+      } else {
+        setUserData({
+          ...user,
+          maskEmail: maskEmail(user.email),
+        })
       }
     }
     if (!userData.name) {
       getUser()
     }
-    console.log(userData, 'Despues de asignar')
   }, [id, userData])
 
   return (
