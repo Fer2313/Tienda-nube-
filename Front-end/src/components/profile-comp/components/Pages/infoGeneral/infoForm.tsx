@@ -86,6 +86,7 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
   useEffect(() => {
     const getUser = async () => {
       const user = await getUserById(id)
+      console.log(user, 'antes de asignar1')
       const separator = user.address.split('-')
       console.log(user, 'antes de asignar')
       setUserData({
