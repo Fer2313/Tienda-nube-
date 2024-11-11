@@ -125,12 +125,7 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
         >
           <Center mb={6}>
             <Box w={24} h={24} position={'relative'}>
-              {userData.image ? (
-                <Avatar size="xl" name="Cliente" src={userData?.image} />
-              ) : (
-                <Avatar size="xl" src="https://bit.ly/broken-link" />
-              )}
-
+              <Avatar size="xl" name="Cliente" src={userData?.image} />
               <Box
                 p={2}
                 rounded={'full'}
