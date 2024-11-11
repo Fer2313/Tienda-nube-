@@ -86,17 +86,17 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
   useEffect(() => {
     const getUser = async () => {
       const user = await getUserById(id)
-      console.log(user, 'antes de asignar')
-      setUserData({
-        ...user,
-        maskEmail: maskEmail(user.email),
-        country: user.address.split('-')[0],
-        state: user.address.split('-')[1],
-        locality: user.address.split('-')[2],
-        street: user.address.split('-')[3],
-        number: user.address.split('-')[4],
-      })
-      console.log(user, 'despues de asignar')
+      if (user.address) {
+        setUserData({
+          ...user,
+          maskEmail: maskEmail(user.email),
+          country: user.address.split('-')[0],
+          state: user.address.split('-')[1],
+          locality: user.address.split('-')[2],
+          street: user.address.split('-')[3],
+          number: user.address.split('-')[4],
+        })
+      }
     }
     if (!userData.name) {
       getUser()
