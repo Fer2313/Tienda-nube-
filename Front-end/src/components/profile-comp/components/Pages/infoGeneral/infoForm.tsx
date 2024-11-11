@@ -87,16 +87,15 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
     const getUser = async () => {
       const user = await getUserById(id)
       console.log(user, 'antes de asignar1')
-      const separator = user.address.split('-')
       console.log(user, 'antes de asignar')
       setUserData({
         ...user,
         maskEmail: maskEmail(user.email),
-        country: separator[0],
-        state: separator[1],
-        locality: separator[2],
-        street: separator[3],
-        number: separator[4],
+        country: user.address.split('-')[0],
+        state: user.address.split('-')[1],
+        locality: user.address.split('-')[2],
+        street: user.address.split('-')[3],
+        number: user.address.split('-')[4],
       })
     }
     if (!userData.name) {
