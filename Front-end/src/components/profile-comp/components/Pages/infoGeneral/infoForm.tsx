@@ -86,7 +86,6 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
   useEffect(() => {
     const getUser = async () => {
       const user = await getUserById(id)
-      console.log(user, 'antes de asignar1')
       console.log(user, 'antes de asignar')
       setUserData({
         ...user,
@@ -97,6 +96,7 @@ const UserInfo = ({ id }: { id: number | undefined }) => {
         street: user.address.split('-')[3],
         number: user.address.split('-')[4],
       })
+      console.log(user, 'despues de asignar')
     }
     if (!userData.name) {
       getUser()
