@@ -29,8 +29,24 @@ export interface myFormLogValues {
   email: string
   password: string
 }
-export interface MyFormValues {
+export interface BodyOrder {
+  order: Order
+  orderDetails: OrderDetail[]
+}
+
+export interface Order {
+  userId: number
+  totalAmount: number
+  status: string
+}
+
+export interface OrderDetail {
+  productId: number | undefined
   amount: number
+  price: number | null | undefined
+}
+export interface MyFormValues {
+  amount: number | undefined
   name: string
   lastName: string
   email: string

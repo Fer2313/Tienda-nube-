@@ -17,7 +17,7 @@ const Order = sequalize.define(
         key: 'userId'
       }
     },
-    totalAmont: {
+    totalAmount: {
       type: DataTypes.INTEGER,
       allowNull: false
     },

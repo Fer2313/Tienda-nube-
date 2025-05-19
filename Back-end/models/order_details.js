@@ -25,7 +25,7 @@ const OrderDetails = sequalize.define(
         key: 'productId'
       }
     },
-    amont: {
+    amount: {
       type: DataTypes.INTEGER,
       allowNull: false
     },

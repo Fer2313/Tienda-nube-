@@ -6,10 +6,12 @@ import React from 'react'
 export default function Field({
   Attribute,
   placeholder,
+  disabled,
   type,
 }: {
   Attribute: keyof MyFormValues
   placeholder: string
+  disabled: boolean
   type: string
 }) {
   return (
@@ -27,6 +29,7 @@ export default function Field({
           <Input
             {...field}
             rounded={'5px'}
+            disabled={disabled}
             border={1}
             size={{ base: 'xs', sm: 'sm', md: 'md', lg: 'md' }}
             borderStyle={'solid'}

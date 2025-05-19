@@ -21,6 +21,10 @@ const User = sequalize.define(
       type: DataTypes.STRING(200),
       allowNull: false
     },
+    noUserEmail: {
+      type: DataTypes.STRING(200),
+      allowNull: true
+    },
     password: {
       type: DataTypes.STRING(255),
       allowNull: false
