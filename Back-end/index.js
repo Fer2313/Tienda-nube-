@@ -85,7 +85,7 @@ server.get('/api/auth/logout', validateUser(), (req, res) => {
   try {
     res.clearCookie('jwt', {
       httpOnly: true,
-      domain: process.env.NODE_ENV === 'production' ? 'app-tienda-nube.fly.dev' : 'localhost',
+      domain: process.env.NODE_ENV === 'production' ? 'https://tienda-nube.onrender.com' : 'localhost',
       secure: process.env.NODE_ENV === 'production',
       maxAge: 3000000,
       sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax',
