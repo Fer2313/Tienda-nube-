@@ -3,12 +3,15 @@ import { NextRequest, NextResponse } from 'next/server'
 
 const verifySession = async (token: string) => {
   try {
-    await axios.get(process.env.NEXT_PUBLIC_API_URL + '/api/verify-session', {
-      headers: {
-        Authorization: `Bearer ${token}`, // Enviar el token aquí
+    await axios.get(
+      process.env.NEXT_PUBLIC_API_URL + '/api/auth/verify-session',
+      {
+        headers: {
+          Authorization: `Bearer ${token}`, // Enviar el token aquí
+        },
+        withCredentials: true,
       },
-      withCredentials: true,
-    })
+    )
     return true
   } catch (error) {
     if (error) {
